@@ -1,0 +1,52 @@
+{
+  "name": "sample-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --watchAll=false --passWithNoTests=true",
+    "test:watch": "react-scripts test --watchAll=true",
+    "eject": "react-scripts eject",
+    "lint": "eslint --quiet --ext \"ts,tsx,js\" src",
+    "lint:fix": "eslint --ext \"ts,tsx,js\" --fix src",
+    "prepare": "husky install"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.1",
+    "@types/react": "^17.0.30",
+    "@types/react-dom": "^17.0.10",
+    "@types/react-redux": "^7.1.7",
+    "@types/react-router-dom": "^5.1.9",
+    "husky": "^7.0.0",
+    "node-sass": "^6.0.1",
+    "react-scripts": "4.0.3",
+    "typescript": "~4.4.4"
+  }
+}
