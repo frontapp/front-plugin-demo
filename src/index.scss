@@ -1,0 +1,21 @@
+@font-face {
+	font-family: SF-Pro-Text;
+	src: url('./assets/fonts/SF-Pro-Text-Regular.otf') format('opentype');
+}
+
+@font-face {
+	font-family: SF-Pro-Text;
+	font-weight: bold;
+	src: url("./assets/fonts/SF-Pro-Text-Bold.otf") format("opentype");
+}
+
+@font-face {
+	font-family: SF-Pro-Text;
+	font-style: italic;
+	src: url("./assets/fonts/SF-Pro-Text-RegularItalic.otf") format("opentype");
+}
+
+
+body {
+	font-family: var(--common-font);
+}

@@ -7,6 +7,7 @@ const SignIn: React.FC<SignInProps> = () => {
 	return <div>
 		SignIn Page
 		<Link to="/items">List of items</Link>
+		<Link to="/create">Create item</Link>
 	</div>;
 };
 
