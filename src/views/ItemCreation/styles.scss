@@ -1,0 +1,56 @@
+.item-creation-wrapper {
+	position: relative;
+	height: 100vh;
+	padding-bottom: 84px;
+	box-sizing: border-box;
+	overflow: hidden;
+
+	.item-creation-prh {
+		padding-top: 6px;
+		padding-bottom: 22px;
+	}
+}
+
+.item-creation-body {
+	height: 100%;
+	padding: 16px;
+	overflow: auto;
+
+	.item-creation-title {
+		padding: 20px 0;
+		font-weight: bold;
+		font-size: 16px;
+		color: var(--gray-90);
+	}
+
+	.item-company-wrapper,
+	.item-role-wrapper,
+	.item-field-wrapper {
+		margin-bottom: 16px;
+
+		.fpcl-dropdown {
+			width: 100%;
+		}
+	}
+
+	.item-attached-wrapper {
+		display: flex;
+		align-items: center;
+
+		input {
+			margin-right: 8px;
+		}
+
+		.attached-title {
+			display: flex;
+			align-items: center;
+			font-size: 14px;
+			color: var(--gray-80);
+		}
+
+		.item-info-block {
+			margin-left: 6px;
+		}
+	}
+
+}
