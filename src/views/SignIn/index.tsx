@@ -8,6 +8,7 @@ const SignIn: React.FC<SignInProps> = () => {
 		SignIn Page
 		<Link to="/items">List of items</Link>
 		<Link to="/create">Create item</Link>
+		<Link to="/items/2323">Item id</Link>
 	</div>;
 };
 
