@@ -1,0 +1,23 @@
+.primary-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  padding-left: 16px;
+  padding-right: 15px;
+
+  .primary-header-text {
+    font-family: var(--common-font);
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: -0.45px;
+    color: var(--gray-90);
+
+    .primary-gear-icon {
+      color: var(--gray-70);
+    }
+  }
+}

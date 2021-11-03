@@ -13,7 +13,7 @@ const ItemDetail:React.FC<ItemDetailProps> = () => {
 	return (
 		<div>
 			ItemDetail Page (id: {id})
-			<Link to="/items">List of items</Link>
+			<Link to="/primary">List of items</Link>
 		</div>
 	);
 };
