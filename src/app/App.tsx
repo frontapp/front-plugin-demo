@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Primary from '../views/Primary';
-import ItemDetail from '../views/ItemDetail';
+import ItemDetails from '../views/ItemDetails';
 import ItemCreation from '../views/ItemCreation';
 import Settings from '../views/Settings';
 import SignIn from '../views/SignIn';
@@ -26,7 +26,7 @@ function App() {
 					<ItemCreation />
 				</Route>
 				<Route path="/items/:id">
-					<ItemDetail />
+					<ItemDetails />
 				</Route>
 				<Route path="/primary">
 					<Primary />
