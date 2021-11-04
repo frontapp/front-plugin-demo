@@ -7,18 +7,18 @@ import { SearchableDropdownItem } from "../../../types/SearchableDropdownItem";
 
 import './styles.scss';
 
-const displayRow: React.FC<{ title: string; value?: any; }> = ({ title, value }) => value ? <>
+const displayRow = ({ title, value }: { title: string; value?: any; }) => value ? <>
 	<div className="details-section-item-property-name">{title}</div>
 	<div className="details-section-item-property-value">{value}</div>
-</> : null
+</> : null;
 
 const displayContact = (contact?: Contact) => {
 	return contact ? <div className="details-main-info">
-		{displayRow({ title: 'Title', value: contact['Full Name'] })}
+		{displayRow({ title: 'Name', value: contact['Full Name'] })}
 		{displayRow({ title: 'Email', value: contact.Email })}
 		{displayRow({ title: 'Phone', value: contact.Phone })}
-		{displayRow({ title: 'Role', value: contact.Title })}
-		{displayRow({ title: 'Title', value: contact.Role?.join() })}
+		{displayRow({ title: 'Role', value: contact.Role?.join })}
+		{displayRow({ title: 'Title', value: contact.Title })}
 	</div> : null;
 }
 
