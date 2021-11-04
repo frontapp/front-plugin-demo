@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { SearchableDropdown, ChannelsIcon } from "front-plugin-components-library";
 import { useAppSelector } from "../../../app/hooks";
 import { frontContextSelector } from "../../../app/frontContextSlice";
-import { Contact, Company } from "../../../interfaces/Item";
+import { Contact } from "../../../interfaces/Contact";
+import { Company } from "../../../interfaces/Company";
 import { SearchableDropdownItem } from "../../../types/SearchableDropdownItem";
 
 import './styles.scss';
@@ -12,7 +13,7 @@ const displayRow = ({ title, value }: { title: string; value?: any; }) => value 
 	<div className="details-section-item-property-value">{value}</div>
 </> : null;
 
-const displayContact = (contact?: Contact) => {
+export const displayContact = (contact?: Contact) => {
 	return contact ? <div className="details-main-info">
 		{displayRow({ title: 'Name', value: contact['Full Name'] })}
 		{displayRow({ title: 'Email', value: contact.Email })}
@@ -22,7 +23,7 @@ const displayContact = (contact?: Contact) => {
 	</div> : null;
 }
 
-const displayCompany = (company?: Company) => {
+export const displayCompany = (company?: Company) => {
 	return company ? <div className="details-item-column-values">
 		<div className="details-section-title">{company.Company}</div>
 		{displayRow({ title: 'Website', value: company.Website })}

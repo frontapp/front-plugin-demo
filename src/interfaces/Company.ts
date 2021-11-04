@@ -1,4 +1,10 @@
 export interface Company {
-	id?: number | null;
-	name?: string;
+	Company: string;
+	Website: string;
+	Address: string;
+	Industry: string;
+	Employees: string;
+	Segment: string;
+	Renewal: string;
+	'Contract Value': number;
 }

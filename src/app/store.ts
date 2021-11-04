@@ -1,12 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import signInReducer from '../views/SignIn/signInSlice';
-import itemsReducer from './itemsSlice';
+import contactsReducer from './contactsSlice';
 import frontContextReducer from './frontContextSlice';
 
 export const store = configureStore({
 	reducer: {
 		signIn: signInReducer,
-		items: itemsReducer,
+		contacts: contactsReducer,
 		front: frontContextReducer
 	},
 });
