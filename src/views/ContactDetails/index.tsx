@@ -2,8 +2,9 @@ import React, {useEffect, useMemo, useState} from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { IconButton, PageReturnHeader, ThreeDotButtonDropdown } from 'front-plugin-components-library';
 // import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { ItemsIds } from '../../app/itemsSlice';
-import { Item } from '../../interfaces/Item';
+import { ContactsIds } from '../../app/contactsSlice';
+import { Contact } from '../../interfaces/Contact';
+import { displayContact, displayCompany } from '../Primary/ThisConversationTab';
 
 import './styles.scss';
 
@@ -11,15 +12,15 @@ interface ParamTypes {
 	id: string;
 }
 
-export interface ItemDetailsProps {}
+export interface ContactDetailsProps {}
 
-const ItemDetails:React.FC<ItemDetailsProps> = () => {
+const ContactDetails:React.FC<ContactDetailsProps> = () => {
 	// const dispatch = useAppDispatch();
 	const { goBack } = useHistory();
 	const { id } = useParams<ParamTypes>();
-	const [item, setItem] = useState<Item>();
+	const [contact, setContact] = useState<Contact>();
 	// TODO: change useMemo when will have real data
-	const items = useMemo(():ItemsIds  => ({}), []);
+	const contacts = useMemo(():ContactsIds  => ({}), []);
 
 	useEffect(() => {
 		const currentItemId = parseInt(id);
@@ -30,15 +31,23 @@ const ItemDetails:React.FC<ItemDetailsProps> = () => {
 
 	useEffect(() => {
 		// TODO: remove mocked item data
-		setItem({
-			id,
-			name: 'Name of contact',
-			email: 'email@email.com',
-			phone: '+380996666666',
-			company: {name: 'Company name'},
-			role: [{name: 'Role 1'}, {name: 'Role 2'}],
+		setContact({
+			"Full Name": "Cyril Gantzer",
+			"Phone": "8435553692",
+			"Title": "Platform Marketing",
+			"Email": "cyril@frontapp.com",
+			companyDetails: {
+				"Contract Value": 12000,
+				"Renewal": "2020-12-31",
+				"Segment": "Enterprise",
+				"Company": "Front",
+				"Address": "San Francisco, CA",
+				"Website": "https://frontapp.com",
+				"Industry": "🖥️ Computer Software",
+				"Employees": "51-200"
+			}
 		});
-	}, [id, items]);
+	}, [id, contacts]);
 
 	const onGoBack = () => {
 		goBack();
@@ -58,8 +67,8 @@ const ItemDetails:React.FC<ItemDetailsProps> = () => {
 
 	const menuItems = [
 		{
-			label: 'Unattach item',
-			key: 'Unattach item',
+			label: 'Unattach contact',
+			key: 'Unattach contact',
 			onClick: onUnattachClick,
 		},
 		{
@@ -79,19 +88,11 @@ const ItemDetails:React.FC<ItemDetailsProps> = () => {
 				</div>
 			</div>
 			<div className="details-main-info">
-				<div className="details-item-name">{item?.name}</div>
-				<div className="details-section-title">Country</div>
-				<div className="details-section-item-property-name">Country name</div>
-				<div className="details-section-item-property-value">{item?.company?.name}</div>
-				<div className="details-section-item-property-name">Email</div>
-				<div className="details-section-item-property-value">{item?.email}</div>
-				<div className="details-section-item-property-name">Phone</div>
-				<div className="details-section-item-property-value">{item?.phone}</div>
-				<div className="details-section-item-property-name">Roles</div>
-				<div className="details-section-item-property-value">{(item?.role || []).map(r => r.name)}</div>
+				{displayContact(contact)}
+				{displayCompany(contact?.companyDetails)}
 			</div>
 		</>
 	);
 };
 
-export default ItemDetails;
+export default ContactDetails;

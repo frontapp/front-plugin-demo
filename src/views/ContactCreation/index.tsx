@@ -3,7 +3,7 @@ import { Formik, FormikErrors, useFormikContext } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { SearchableDropdown, Footer, TextField, PageReturnHeader, Info } from 'front-plugin-components-library';
 import { useAppDispatch } from '../../app/hooks';
-import { createItem } from '../../app/itemsSlice';
+import { createContact } from '../../app/contactsSlice';
 import { SearchableDropdownItem } from '../../types/SearchableDropdownItem';
 import { Company } from '../../interfaces/Company';
 import { Role } from '../../interfaces/Role';
@@ -11,7 +11,7 @@ import { Role } from '../../interfaces/Role';
 import './styles.scss';
 
 // tslint:disable-next-line
-export interface ItemCreationProps {}
+export interface ContactCreationProps {}
 
 // Shape of form values
 interface FormValues {
@@ -42,19 +42,19 @@ const initialValues: FormValues = {
 	attached: true,
 };
 
-const ItemCreation: React.FC<ItemCreationProps> = () => {
+const ContactCreation: React.FC<ContactCreationProps> = () => {
 	const { goBack } = useHistory();
 	const dispatch = useAppDispatch();
 
 	const onSubmit = useCallback(async (values) => {
 		console.log('values', values);
-		dispatch(createItem());
+		dispatch(createContact());
 		// TODO: Show success Alert
 		// return to the prev route
 		goBack();
 	},[dispatch, goBack]);
 
-	return <div className="item-creation-wrapper">
+	return <div className="contact-creation-wrapper">
 		<Formik
 			initialValues={initialValues}
 			validate={formValidation}
@@ -67,46 +67,46 @@ const ItemCreation: React.FC<ItemCreationProps> = () => {
 				dirty,
 				setFieldValue,
 			}) => (<>
-				<div className="item-creation-body">
-					<PageReturnHeader label="Create new" onReturnClick={goBack} className="item-creation-prh" />
-					<h2 className="item-creation-title">Create new contact</h2>
-					<div className="item-field-wrapper">
+				<div className="contact-creation-body">
+					<PageReturnHeader label="Create new" onReturnClick={goBack} className="contact-creation-prh" />
+					<h2 className="contact-creation-title">Create new contact</h2>
+					<div className="contact-field-wrapper">
 						<TextField
 							isRequired={true}
 							label="Name"
 							value={values.name}
-							placeholder="Create item name"
+							placeholder="Create contact name"
 							onChange={(name: string) => setFieldValue('name', name)}
 						/>
 					</div>
-					<div className="item-field-wrapper">
+					<div className="contact-field-wrapper">
 						<TextField
 							label="Email"
 							value={values.email}
-							placeholder="Create item email"
+							placeholder="Create contact email"
 							onChange={(name: string) => setFieldValue('name', name)}
 						/>
 					</div>
-					<div className="item-field-wrapper">
+					<div className="contact-field-wrapper">
 						<TextField
 							label="Phone"
 							value={values.phone}
-							placeholder="Create item phone"
+							placeholder="Create contact phone"
 							onChange={(name: string) => setFieldValue('name', name)}
 						/>
 					</div>
 					<ItemCompany />
 					<ItemRole />
-					<div className="item-attached-wrapper">
+					<div className="contact-attached-wrapper">
 						<span className="attached-title" onClick={() => setFieldValue('attached', !values.attached)}>
 							<input type="checkbox" id="attached" checked={values.attached}  />
 							<label htmlFor="attached">Attach to current conversation</label>
 						</span>
 						<Info
-							content="Select this to automatically attach the item to the conversation after creation."
+							content="Select this to automatically attach the contact to the conversation after creation."
 							position="bottom-right-border"
 							width="224px"
-							className="item-info-block"
+							className="contact-info-block"
 						/>
 					</div>
 				</div>
@@ -131,7 +131,7 @@ const ItemCompany = () => {
 	const [companyOptions, setCompanyOptions] = useState<SearchableDropdownItem[]>([]);
 
 	useEffect(() => {
-		const companyOptions: SearchableDropdownItem[] = companies.map((company) => ({ key: company.id as number || 'null', label: company.name as string }));
+		const companyOptions: SearchableDropdownItem[] = companies.map((company) => ({ key: company['Contract Value'], label: company['Company'] }));
 		setCompanyOptions(companyOptions);
 	}, [companies]);
 
@@ -144,7 +144,7 @@ const ItemCompany = () => {
 		setFieldValue('company', value);
 	};
 
-	return <div className="item-company-wrapper">
+	return <div className="contact-company-wrapper">
 		<SearchableDropdown
 			onSelectValue={handleSelectWorkspace}
 			title="Company"
@@ -177,7 +177,7 @@ const ItemRole = () => {
 		setFieldValue('role', value);
 	};
 
-	return <div className="item-role-wrapper">
+	return <div className="contact-role-wrapper">
 		<SearchableDropdown
 			onSelectValue={handleSelectWorkspace}
 			title="Role"
@@ -188,4 +188,4 @@ const ItemRole = () => {
 	</div>;
 };
 
-export default ItemCreation;
+export default ContactCreation;

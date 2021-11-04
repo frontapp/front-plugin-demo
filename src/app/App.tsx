@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Primary from '../views/Primary';
-import ItemDetails from '../views/ItemDetails';
-import ItemCreation from '../views/ItemCreation';
+import ItemDetails from '../views/ContactDetails';
+import ItemCreation from '../views/ContactCreation';
 import Settings from '../views/Settings';
 import SignIn from '../views/SignIn';
 
 import Front from '@frontapp/plugin-sdk';
-import { useAppDispatch, useAppSelector } from './hooks';
+import { useAppDispatch } from './hooks';
 import { setFrontContext } from './frontContextSlice';
 
 function App() {
