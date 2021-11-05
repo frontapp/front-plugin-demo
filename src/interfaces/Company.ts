@@ -11,6 +11,6 @@ export interface Company {
 }
 
 export interface CompanyFull {
-	id: string;
+	id?: string;
 	fields: Company
 }
