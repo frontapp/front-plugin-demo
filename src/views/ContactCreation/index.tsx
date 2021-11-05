@@ -5,8 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import { SearchableDropdown, Footer, TextField, PageReturnHeader } from 'front-plugin-components-library';
 import { useAppDispatch } from '../../app/hooks';
 import { SearchableDropdownItem } from '../../types/SearchableDropdownItem';
-import { Company } from '../../interfaces/Company';
-import { Contact } from "../../interfaces/Contact";
+import { CompanyFull } from '../../interfaces/Company';
+import { ContactFull } from "../../interfaces/Contact";
 import { ROLE_OPTIONS } from '../../consts/roles';
 import { createContact } from '../../utils/airtableUtils';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,8 +15,8 @@ import './styles.scss';
 
 // tslint:disable-next-line
 export interface ContactCreationProps {
-	companies: Company[];
-	onContactCreate: (contacts: Contact[]) => void;
+	companies: CompanyFull[];
+	onContactCreate: (contacts: ContactFull[]) => void;
 }
 
 // Shape of form values
@@ -51,7 +51,7 @@ const ContactCreation: React.FC<ContactCreationProps> = ({ companies, onContactC
 	const dispatch = useAppDispatch();
 
 	const onSubmit = useCallback(async (values) => {
-		const dataToPass: Contact[] = [{
+		const dataToPass: ContactFull[] = [{
 			fields: {
 				"Full Name": values.name,
 				"Email": values.email,
@@ -133,7 +133,7 @@ const ContactCreation: React.FC<ContactCreationProps> = ({ companies, onContactC
 };
 
 interface ItemCompanyProps {
-	companies: Company[];
+	companies: CompanyFull[];
 }
 
 const ItemCompany: React.FC<ItemCompanyProps> = ({ companies }) => {

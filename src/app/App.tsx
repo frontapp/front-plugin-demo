@@ -7,16 +7,16 @@ import ItemCreation from '../views/ContactCreation';
 import Settings from '../views/Settings';
 import SignIn from '../views/SignIn';
 import { getCompaniesList, getContactsList } from '../utils/airtableUtils';
-import { Company } from "../interfaces/Company";
-import { Contact } from "../interfaces/Contact";
+import { CompanyFull } from "../interfaces/Company";
+import { ContactFull } from "../interfaces/Contact";
 
 import Front from '@frontapp/plugin-sdk';
 import { useAppDispatch } from './hooks';
 import { setFrontContext } from './frontContextSlice';
 
 function App() {
-	const [companies, setCompanies] = useState<Company[]>([]);
-	const [contacts, setContacts] = useState<Contact[]>([]);
+	const [companies, setCompanies] = useState<CompanyFull[]>([]);
+	const [contacts, setContacts] = useState<ContactFull[]>([]);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
@@ -39,7 +39,7 @@ function App() {
 		getContacts();
 	}, []);
 
-	const onContactCreate = (createdContacts: Contact[]) => {
+	const onContactCreate = (createdContacts: ContactFull[]) => {
 		setContacts([...createdContacts, ...contacts])
 	}
 
