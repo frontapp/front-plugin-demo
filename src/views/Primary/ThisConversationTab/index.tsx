@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { SearchableDropdown, ChannelsIcon } from "front-plugin-components-library";
 import { useAppSelector } from "../../../app/hooks";
 import { frontContextSelector } from "../../../app/frontContextSlice";
-import { Contact } from "../../../interfaces/Contact";
-import { Company } from "../../../interfaces/Company";
+import { Contact, ContactFull } from "../../../interfaces/Contact";
+import { Company, CompanyFull } from "../../../interfaces/Company";
 import { SearchableDropdownItem } from "../../../types/SearchableDropdownItem";
 
 import './styles.scss';
+import { getCompaniesList, getContactsList } from "../../../utils/airtableUtils";
 
 const displayRow = ({ title, value }: { title: string; value?: any; }) => value ? <>
 	<div className="details-section-item-property-name">{title}</div>
@@ -40,79 +41,59 @@ const ThisConversationTab = (): JSX.Element => {
 
 	const frontContext = useAppSelector(frontContextSelector);
 	// all contacts per conversation
-	const [contacts, setContacts] = useState<Contact[]>([]);
+	const [contacts, setContacts] = useState<ContactFull[]>([]);
+	// all companies per conversation
+	const [companies, setCompanies] = useState<CompanyFull[]>([]);
 	// all contacts as dropdown options
 	const [contactOptions, setContactOptions] = useState<SearchableDropdownItem[]>([]);
 	// currently shown contact
-	const [selectedContact, selectContact] = useState<Contact | null>();
+	const [selectedContact, selectContact] = useState<ContactFull | null>();
 
 	const handleSelectContact = (option: SearchableDropdownItem) => {
-		const item = contacts.find(contact => contact['Full Name'] === option.label)
+		const item = contacts.find(contact => contact.fields['Full Name'] === option.label)
 		if (item) {
 			selectContact(item);
 		}
 	};
 
+	const getData = async (contactNames: string[]) => {
+		// TODO add new values to DB to see real contacts in plugin
+		contactNames = ["Leyton Graves","Pierre Smith"]
+		const contacts = await getContactsList({'filterByFormula': `OR(${contactNames.map(name => `{Full Name}='${name}'`)})`});
+		const companies = await getCompaniesList({'filterByFormula': `OR(${contacts.map((c: any) => `FIND('${c.fields["Full Name"]}', ARRAYJOIN({Contacts}))`)})`});
+
+		setContacts(contacts);
+		setCompanies(companies)
+	}
+
+
 	// Takes contact names from Front Conversation
 	useEffect(() => {
 		if (!frontContext || frontContext.listMessages === undefined) {
 			setContacts([]);
+			setCompanies([]);
 			return;
 		}
 		frontContext.listMessages().then(r => {
 			const allConversationContacts: string[]  = r.results.flatMap(m => [...(m.to.map(t => t.handle)), m.from?.handle, ...(m.cc?.map(c => c.handle) || []), ...(m.bcc?.map(b => b.handle) || [])])
 				.filter((value, index, self) => self.indexOf(value) === index);
 
-			// TODO fetch real data later using allConversationContacts (array of names)
-			const mocked: Contact[] = [
-				{
-					"Full Name": "Cyril Gantzer",
-					"Phone": "8435553692",
-					"Title": "Platform Marketing",
-					"Email": "cyril@frontapp.com",
-					companyDetails: {
-						"Contract Value": 12000,
-						"Renewal": "2020-12-31",
-						"Segment": "Enterprise",
-						"Company": "Front",
-						"Address": "San Francisco, CA",
-						"Website": "https://frontapp.com",
-						"Industry": "🖥️ Computer Software",
-						"Employees": "51-200"
-					}
-				}, {
-					"Full Name": "Pierre Smith",
-					"Title": "Sales Executive",
-					"Email": "pierre@auditlawyer.club",
-					"Role": [
-						"Influencer"
-					],
-					companyDetails: {
-						"Contract Value": 15000,
-						"Renewal": "2020-09-15",
-						"Segment": "VIP",
-						"Company": "Audit Lawyer",
-						"Address": "New York, NY",
-						"Website": "https://auditlawyer.club",
-						"Industry": "💼 Management Consulting",
-						"Employees": "11-50"
-					}
-				}
-			]
-			setContacts(mocked);
+			return getData(allConversationContacts);
 		})
 		.catch(() => {
 			setContacts([])
+			setCompanies([])
 		});
 	}, [frontContext]);
 
 	useEffect(() => {
-		const dropdownOptions = contacts.map(contact => ({ key: contact['Full Name'], label: contact['Full Name'] }))
+		const dropdownOptions = contacts.map(contact => ({ key: contact.fields['Full Name'], label: contact.fields['Full Name'] }))
 		setContactOptions(dropdownOptions);
 
 		dropdownOptions.length ? handleSelectContact(dropdownOptions[0]) : selectContact(null)
 	}, [contacts])
 
+	const companiesToBeDisplayed = selectedContact ? companies.filter(c => c?.fields?.Contacts?.includes(selectedContact?.id as string)).map(c => c.fields) : [];
 
 	return <div className="this-conversation-wrapper">
 		<div className="this-conversation-header">
@@ -129,8 +110,9 @@ const ThisConversationTab = (): JSX.Element => {
 			</div>
 		</div>
 		{selectedContact && <div>
-			{displayContact(selectedContact)}
-			{displayCompany(selectedContact?.companyDetails)}
+			{displayContact(selectedContact.fields)}
+			{/* there is a possibility one contact has multiple companies assignment*/}
+			{companiesToBeDisplayed.map((c: Company) =>  displayCompany(c))}
 		</div>}
 	</div>
 };

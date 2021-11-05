@@ -26,10 +26,10 @@ const requestWrapper = async (url: string, method: MethodType, data?: DataType) 
     return result?.data?.records;
 }
 
-export const getCompaniesList = () => {
-    return requestWrapper('Companies', 'get');
+export const getCompaniesList = (data?: DataType) => {
+    return requestWrapper('Companies', 'get', data);
 }
 
-export const getContactsList = () => {
-    return requestWrapper('Contacts', 'get');
+export const getContactsList = (data?: DataType) => {
+    return requestWrapper('Contacts', 'get', data);
 }
