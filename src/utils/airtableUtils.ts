@@ -1,7 +1,7 @@
 import axios from "axios";
 import {getSecret} from "./helpers";
-import {Company} from "../interfaces/Company";
-import {Contact} from "../interfaces/Contact";
+import { CompanyFull } from "../interfaces/Company";
+import { ContactFull } from "../interfaces/Contact";
 
 const API_ENDPOINT = 'https://api.airtable.com/v0/appJU5jmW6ndxJrWD/';
 
@@ -14,9 +14,7 @@ const getHeaders = () => ({
 
 type MethodType = 'get' | 'post';
 type DataType = {
-    records: {
-        [key: string]: any
-    }
+    [key: string]: any
 }
 
 const requestWrapper = async (url: string, method: MethodType, data?: DataType | null) => {
@@ -31,14 +29,14 @@ const requestWrapper = async (url: string, method: MethodType, data?: DataType |
     return result?.data?.records;
 }
 
-export const getCompaniesList = (): Promise<Company[]> => {
-    return requestWrapper('Companies', 'get');
+export const getCompaniesList = (data?: DataType): Promise<CompanyFull[]> => {
+    return requestWrapper('Companies', 'get', data);
 }
 
-export const getContactsList = (): Promise<Contact[]> => {
-    return requestWrapper('Contacts', 'get');
+export const getContactsList = (data?: DataType): Promise<ContactFull[]> => {
+    return requestWrapper('Contacts', 'get', data);
 }
 
-export const createContact = (data: Contact[]): Promise<Contact[]> => {
+export const createContact = (data: ContactFull[]): Promise<ContactFull[]> => {
     return requestWrapper('Contacts', 'post', {records: data});
 }
