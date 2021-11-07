@@ -1,5 +1,3 @@
-import { Company } from './Company';
-
 export interface Contact {
 	'Full Name': string;
 	Title?: string;
@@ -7,7 +5,6 @@ export interface Contact {
 	Phone?: string;
 	Role?: string[];
 	Company?: string[];
-	companyDetails?: Company
 }
 
 export interface ContactFull {

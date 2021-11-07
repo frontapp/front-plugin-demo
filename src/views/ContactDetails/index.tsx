@@ -1,9 +1,8 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { IconButton, PageReturnHeader, ThreeDotButtonDropdown } from 'front-plugin-components-library';
-// import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { ContactsIds } from '../../app/contactsSlice';
-import { Contact } from '../../interfaces/Contact';
+import { ContactFull } from '../../interfaces/Contact';
+import { CompanyFull } from "../../interfaces/Company";
 import { displayContact, displayCompany } from '../Primary/ThisConversationTab';
 
 import './styles.scss';
@@ -12,42 +11,23 @@ interface ParamTypes {
 	id: string;
 }
 
-export interface ContactDetailsProps {}
+export interface ContactDetailsProps {
+	contacts: ContactFull[]
+	companies: CompanyFull[]
+}
 
-const ContactDetails:React.FC<ContactDetailsProps> = () => {
-	// const dispatch = useAppDispatch();
+const ContactDetails:React.FC<ContactDetailsProps> = ({contacts, companies}) => {
 	const { goBack } = useHistory();
 	const { id } = useParams<ParamTypes>();
-	const [contact, setContact] = useState<Contact>();
-	// TODO: change useMemo when will have real data
-	const contacts = useMemo(():ContactsIds  => ({}), []);
+	const [contact, setContact] = useState<ContactFull>();
+	const [company, setCompany] = useState<CompanyFull>();
 
 	useEffect(() => {
-		const currentItemId = parseInt(id);
-		console.log('currentItemId', currentItemId);
-		// TODO fetch data of item by id
-		// dispatch(fetchItemsByIds([currentItemId]));
-	}, []);
-
-	useEffect(() => {
-		// TODO: remove mocked item data
-		setContact({
-			"Full Name": "Cyril Gantzer",
-			"Phone": "8435553692",
-			"Title": "Platform Marketing",
-			"Email": "cyril@frontapp.com",
-			companyDetails: {
-				"Contract Value": 12000,
-				"Renewal": "2020-12-31",
-				"Segment": "Enterprise",
-				"Company": "Front",
-				"Address": "San Francisco, CA",
-				"Website": "https://frontapp.com",
-				"Industry": "🖥️ Computer Software",
-				"Employees": "51-200"
-			}
-		});
-	}, [id, contacts]);
+		const selectedContact = contacts?.find(contact => contact.id === id);
+		const selectedCompany = companies?.find(company => selectedContact?.fields?.Company?.includes(company?.id as string));
+		setContact(selectedContact);
+		setCompany(selectedCompany);
+	}, [contacts, companies, id]);
 
 	const onGoBack = () => {
 		goBack();
@@ -88,8 +68,8 @@ const ContactDetails:React.FC<ContactDetailsProps> = () => {
 				</div>
 			</div>
 			<div className="details-main-info">
-				{displayContact(contact)}
-				{displayCompany(contact?.companyDetails)}
+				{displayContact(contact?.fields)}
+				{displayCompany(company?.fields)}
 			</div>
 		</>
 	);

@@ -50,7 +50,7 @@ function App() {
 					<ItemCreation companies={companies} onContactCreate={onContactCreate} />
 				</Route>
 				<Route path="/items/:id">
-					<ItemDetails />
+					<ItemDetails companies={companies} contacts={contacts} />
 				</Route>
 				<Route path="/primary">
 					<Primary />

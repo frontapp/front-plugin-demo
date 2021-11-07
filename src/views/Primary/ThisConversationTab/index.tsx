@@ -16,10 +16,10 @@ const displayRow = ({ title, value }: { title: string; value?: any; }) => value 
 
 export const displayContact = (contact?: Contact) => {
 	return contact ? <div className="details-main-info">
-		{displayRow({ title: 'Name', value: contact['Full Name'] })}
+		<div className="details-section-title">{contact['Full Name']}</div>
 		{displayRow({ title: 'Email', value: contact.Email })}
 		{displayRow({ title: 'Phone', value: contact.Phone })}
-		{displayRow({ title: 'Role', value: contact.Role?.join })}
+		{displayRow({ title: 'Role', value: contact.Role?.join(', ') })}
 		{displayRow({ title: 'Title', value: contact.Title })}
 	</div> : null;
 }
