@@ -1,0 +1,34 @@
+.contact-cart-link-wrapper {
+	text-decoration: none;
+
+	&, &:hover, &:active, &:focus {
+		color: inherit;
+	}
+
+	.fpcl-item-card-header {
+		margin-bottom: 0;
+	}
+}
+
+.contact-card {
+	margin-bottom: 16px;
+
+	.contact-card-body-line {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		margin-bottom: 8px;
+	}
+
+	.contact-card-body-line-text {
+		display: flex;
+		align-items: center;
+		font-family: var(--common-font);
+		font-style: normal;
+		font-weight: normal;
+		font-size: 12px;
+		line-height: 16px;
+		letter-spacing: -0.15px;
+		color: var(--gray-70);
+	}
+}

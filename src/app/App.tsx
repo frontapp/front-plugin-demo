@@ -51,8 +51,8 @@ function App() {
 				<Route path="/items/:id">
 					<ItemDetails companies={companies} contacts={contacts} />
 				</Route>
-				<Route path="/primary">
-					<Primary />
+				<Route path="/primary" >
+					<Primary companies={companies} contacts={contacts} />
 				</Route>
 				<Route path="/">
 					<SignIn />
