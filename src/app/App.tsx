@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Primary from '../views/Primary';
 import ItemDetails from '../views/ContactDetails';
 import ItemCreation from '../views/ContactCreation';
-import Settings from '../views/Settings';
 import SignIn from '../views/SignIn';
 import { getCompaniesList, getContactsList } from '../utils/airtableUtils';
 import { CompanyFull } from "../interfaces/Company";
@@ -54,9 +53,6 @@ function App() {
 				</Route>
 				<Route path="/primary">
 					<Primary />
-				</Route>
-				<Route path="/settings">
-					<Settings />
 				</Route>
 				<Route path="/">
 					<SignIn />

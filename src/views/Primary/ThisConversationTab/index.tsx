@@ -50,7 +50,7 @@ const ThisConversationTab = (): JSX.Element => {
 	const [selectedContact, selectContact] = useState<ContactFull | null>();
 
 	const handleSelectContact = (option: SearchableDropdownItem) => {
-		const item = contacts.find(contact => contact.fields['Full Name'] === option.label)
+		const item = contacts.find(contact => contact.id === option.key)
 		if (item) {
 			selectContact(item);
 		}
@@ -63,7 +63,7 @@ const ThisConversationTab = (): JSX.Element => {
 		const companies = await getCompaniesList({'filterByFormula': `OR(${contacts.map((c: any) => `FIND('${c.fields["Full Name"]}', ARRAYJOIN({Contacts}))`)})`});
 
 		setContacts(contacts);
-		setCompanies(companies)
+		setCompanies(companies);
 	}
 
 
@@ -87,7 +87,7 @@ const ThisConversationTab = (): JSX.Element => {
 	}, [frontContext]);
 
 	useEffect(() => {
-		const dropdownOptions = contacts.map(contact => ({ key: contact.fields['Full Name'], label: contact.fields['Full Name'] }))
+		const dropdownOptions = contacts.map(contact => ({ key: contact.id as string, label: contact.fields['Full Name'] }))
 		setContactOptions(dropdownOptions);
 
 		dropdownOptions.length ? handleSelectContact(dropdownOptions[0]) : selectContact(null)
