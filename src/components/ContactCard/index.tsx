@@ -9,9 +9,10 @@ import './styles.scss';
 
 interface ContactCardProps {
 	contact: Contact;
+	id: string;
 }
 
-const ContactCard: React.FC<ContactCardProps> = ({ contact }) => {
+const ContactCard: React.FC<ContactCardProps> = ({ contact , id}) => {
 	const onUnattachClick = (key: string) => {
 		// TODO some action when click on unattach
 		console.log(`${key} clicked`);
@@ -46,7 +47,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ contact }) => {
 	];
 
 	return (
-		<Link className='contact-cart-link-wrapper' to={`detail/${2}`}>
+		<Link className='contact-cart-link-wrapper' to={`/items/${id}`}>
 			<ItemCard title={contact['Full Name']} width={'100%'} menuItems={menuItems} className="contact-card">
 				<div className="contact-card-body-line">
 					<span className="item-card-body-line-text">{contact['Email']}</span>

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { SearchInput, NoResults } from 'front-plugin-components-library';
 import ContactCard from '../../../components/ContactCard';
-import { ContactFull, Contact } from '../../../interfaces/Contact';
+import { ContactFull } from '../../../interfaces/Contact';
 import { CompanyFull} from '../../../interfaces/Company';
 
 import './styles.scss';
@@ -14,10 +14,9 @@ export interface SearchTabProps {
 const SearchTab:React.FC<SearchTabProps> = ({contacts}) => {
 	const [searchValue, setSearchValue] = useState<string>('');
 
-	const contactsToDisplay: Contact[] = useMemo(() => {
+	const contactsToDisplay: ContactFull[] = useMemo(() => {
 		return contacts
-			.map(({ fields }) => fields)
-			.filter(contact => contact['Full Name']?.includes(searchValue) || contact['Email']?.includes(searchValue));
+			.filter(({ fields }) => fields['Full Name']?.includes(searchValue) || fields['Email']?.includes(searchValue));
 	}, [contacts, searchValue]);
 
 	const onContactsSearch = (itemName: string) => {
@@ -34,10 +33,10 @@ const SearchTab:React.FC<SearchTabProps> = ({contacts}) => {
 			)
 		}
 		{
-			contactsToDisplay.length > 0 && contactsToDisplay.map((contact:  Contact) => <ContactCard contact={contact} key={contact['Full Name']} />)
+			contactsToDisplay.length > 0 && contactsToDisplay.map(({ fields, id }) => <ContactCard contact={fields} key={fields['Full Name']} id={id as string} />)
 		}
 		{
-			contacts.length === 0 && !!searchValue && <NoResults className="search-tab-body-no-results" />
+			contactsToDisplay.length === 0 && !!searchValue && <NoResults className="search-tab-body-no-results" />
 		}
 	</div>
 };
