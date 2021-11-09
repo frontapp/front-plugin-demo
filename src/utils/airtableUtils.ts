@@ -3,7 +3,7 @@ import {getSecret} from "./helpers";
 import { CompanyFull } from "../interfaces/Company";
 import { ContactFull } from "../interfaces/Contact";
 
-const API_ENDPOINT = 'https://api.airtable.com/v0/appJU5jmW6ndxJrWD/';
+const API_ENDPOINT = `https://api.airtable.com/v0/${getSecret('REACT_APP_BASE_ID')}/`;
 
 const getUserApiKey = () => `Bearer ${getSecret('REACT_APP_API_KEY')}`;
 

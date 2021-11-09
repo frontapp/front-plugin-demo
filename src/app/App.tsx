@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import Primary from '../views/Primary';
 import ItemDetails from '../views/ContactDetails';
 import ItemCreation from '../views/ContactCreation';
-import SignIn from '../views/SignIn';
 import { getCompaniesList, getContactsList } from '../utils/airtableUtils';
 import { CompanyFull } from "../interfaces/Company";
 import { ContactFull } from "../interfaces/Contact";
@@ -45,17 +44,19 @@ function App() {
 	return (
 		<Router>
 			<Switch>
+				<Route
+					exact
+					path="/"
+					render={() => <Redirect to="/primary" />}
+				/>
 				<Route path="/create">
 					<ItemCreation companies={companies} onContactCreate={onContactCreate} />
 				</Route>
 				<Route path="/items/:id">
 					<ItemDetails companies={companies} contacts={contacts} />
 				</Route>
-				<Route path="/primary">
-					<Primary />
-				</Route>
-				<Route path="/">
-					<SignIn />
+				<Route path="/primary" >
+					<Primary companies={companies} contacts={contacts} />
 				</Route>
 			</Switch>
 		</Router>

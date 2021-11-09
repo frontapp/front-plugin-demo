@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import { Tabs } from 'front-plugin-components-library';
+import { ContactFull } from '../../interfaces/Contact';
+import { CompanyFull } from "../../interfaces/Company";
+
+import ThisConversationTab from "./ThisConversationTab";
+import SearchTab from "./SearchTab";
 
 import './styles.scss';
-import ThisConversationTab from "./ThisConversationTab";
 
 const tabs = [
 	{
@@ -16,7 +20,12 @@ const tabs = [
 	}
 ];
 
-const Primary: React.FC = () => {
+export interface PrimaryProps {
+	contacts: ContactFull[]
+	companies: CompanyFull[]
+}
+
+const Primary: React.FC<PrimaryProps> = ({ contacts, companies }) => {
 	const history = useHistory();
 	const location = useLocation();
 	const [selectedTab, setSelectedTab] = useState(tabs[0].key);
@@ -42,7 +51,7 @@ const Primary: React.FC = () => {
 					<ThisConversationTab />
 				</Route>
 				<Route path="/primary/search">
-					All tab view here
+					<SearchTab companies={companies} contacts={contacts} />
 				</Route>
 			</Switch>
 		</div>

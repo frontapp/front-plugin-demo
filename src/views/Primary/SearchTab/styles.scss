@@ -1,0 +1,26 @@
+.search-tab-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding: 16px;
+
+
+	.search-tab-body-search-input {
+		margin-bottom: 24px;
+	}
+
+	.search-tab-body-search-value {
+		margin-bottom: 16px;
+		font-family: var(--common-font);
+		font-style: normal;
+		font-weight: bold;
+		font-size: 16px;
+		line-height: 100%;
+		letter-spacing: -0.45px;
+		color: var(--gray-80);
+	}
+
+	.search-tab-body-no-results {
+		margin-top: 132px;
+	}
+}

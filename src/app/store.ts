@@ -1,11 +1,9 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import signInReducer from '../views/SignIn/signInSlice';
 import contactsReducer from './contactsSlice';
 import frontContextReducer from './frontContextSlice';
 
 export const store = configureStore({
 	reducer: {
-		signIn: signInReducer,
 		contacts: contactsReducer,
 		front: frontContextReducer
 	},
