@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
-import { Tabs } from 'front-plugin-components-library';
+import { Switch, Route, useLocation, useHistory, Link } from 'react-router-dom';
+import { Tabs, Button } from 'front-plugin-components-library';
 import { ContactFull } from '../../interfaces/Contact';
 import { CompanyFull } from "../../interfaces/Company";
 
@@ -44,6 +44,9 @@ const Primary: React.FC<PrimaryProps> = ({ contacts, companies }) => {
 		<div>
 			<div className="primary-header">
 				<span className="primary-header-text">Items</span>
+				<Link to={'/create'} className="primary-header-link">
+					<Button variant="tertiary" label="+ Create contact" />
+				</Link>
 			</div>
 			<Tabs tabs={tabs} onClick={onTabClick} isSelected={selectedTab} />
 			<Switch>
