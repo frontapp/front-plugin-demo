@@ -16,7 +16,7 @@ const SearchTab:React.FC<SearchTabProps> = ({contacts}) => {
 
 	const contactsToDisplay: ContactFull[] = useMemo(() => {
 		return contacts
-			.filter(({ fields }) => fields['Full Name']?.includes(searchValue) || fields['Email']?.includes(searchValue));
+			.filter(({ fields }) => fields['Full Name']?.toLowerCase()?.includes(searchValue.toLowerCase()) || fields['Email']?.toLowerCase()?.includes(searchValue.toLowerCase()));
 	}, [contacts, searchValue]);
 
 	const onContactsSearch = (itemName: string) => {

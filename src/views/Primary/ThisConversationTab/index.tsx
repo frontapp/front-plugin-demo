@@ -104,7 +104,7 @@ const ThisConversationTab = (): JSX.Element => {
 					title="Contact"
 					placeholder="Select contact"
 					options={contactOptions}
-					value={selectedContact}
+					value={{ key: selectedContact?.id, label: selectedContact?.fields['Full Name'] }}
 					icon={<ChannelsIcon />}
 				/>
 			</div>
