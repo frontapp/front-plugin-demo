@@ -2,7 +2,7 @@ import React  from 'react';
 import { Link } from 'react-router-dom';
 import {
 	ItemCard,
-} from 'front-plugin-components-library';
+} from '@frontapp/plugin-components';
 import { Contact } from '../../interfaces/Contact';
 
 import './styles.scss';

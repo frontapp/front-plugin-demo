@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, useLocation, useHistory, Link } from 'react-router-dom';
-import { Tabs, Button } from 'front-plugin-components-library';
+import { Tabs, Button } from '@frontapp/plugin-components';
 import { ContactFull } from '../../interfaces/Contact';
 import { CompanyFull } from "../../interfaces/Company";
 

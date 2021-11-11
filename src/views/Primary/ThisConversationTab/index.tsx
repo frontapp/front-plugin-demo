@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SearchableDropdown, ChannelsIcon } from "front-plugin-components-library";
+import { SearchableDropdown, ChannelsIcon } from "@frontapp/plugin-components";
 import { useAppSelector } from "../../../app/hooks";
 import { frontContextSelector } from "../../../app/frontContextSlice";
 import { Contact, ContactFull } from "../../../interfaces/Contact";

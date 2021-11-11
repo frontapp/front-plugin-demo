@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import { Formik, FormikErrors, useFormikContext } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { SearchableDropdown, Footer, TextField, PageReturnHeader } from 'front-plugin-components-library';
+import { SearchableDropdown, Footer, TextField, PageReturnHeader } from '@frontapp/plugin-components';
 import { useAppDispatch } from '../../app/hooks';
 import { SearchableDropdownItem } from '../../types/SearchableDropdownItem';
 import { CompanyFull } from '../../interfaces/Company';

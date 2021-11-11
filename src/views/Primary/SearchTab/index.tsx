@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { SearchInput, NoResults } from 'front-plugin-components-library';
+import { SearchInput, NoResults } from '@frontapp/plugin-components';
 import ContactCard from '../../../components/ContactCard';
 import { ContactFull } from '../../../interfaces/Contact';
 import { CompanyFull} from '../../../interfaces/Company';
