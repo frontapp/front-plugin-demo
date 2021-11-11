@@ -42,7 +42,7 @@ function App() {
 	}
 
 	return (
-		<Router>
+		<Router basename="/front-plugin-demo">
 			<Switch>
 				<Route
 					exact
