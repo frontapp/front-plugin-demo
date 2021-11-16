@@ -51,11 +51,6 @@ const ContactDetails:React.FC<ContactDetailsProps> = ({contacts, companies}) => 
 			key: 'Unattach contact',
 			onClick: onUnattachClick,
 		},
-		{
-			label: 'Copy link',
-			key: 'Copy link',
-			onClick: onCopyLinkClick,
-		},
 	];
 
 	return (
@@ -63,7 +58,6 @@ const ContactDetails:React.FC<ContactDetailsProps> = ({contacts, companies}) => 
 			<div className="details-header">
 				<PageReturnHeader onReturnClick={onGoBack} label="Contact details" />
 				<div className="details-header-buttons">
-					<IconButton icon="popout" onClick={onOpenClick} />
 					<ThreeDotButtonDropdown items={menuItems} />
 				</div>
 			</div>

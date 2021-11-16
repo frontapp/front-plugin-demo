@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { SearchableDropdown, ChannelsIcon } from "@frontapp/plugin-components";
+import { SearchableDropdown, ChannelsIcon, SearchableDropdownItem } from "@frontapp/plugin-components";
 import { useAppSelector } from "../../../app/hooks";
 import { frontContextSelector } from "../../../app/frontContextSlice";
 import { Contact, ContactFull } from "../../../interfaces/Contact";
 import { Company, CompanyFull } from "../../../interfaces/Company";
-import { SearchableDropdownItem } from "../../../types/SearchableDropdownItem";
 
 import './styles.scss';
 import { getCompaniesList, getContactsList } from "../../../utils/airtableUtils";
@@ -100,11 +99,12 @@ const ThisConversationTab = (): JSX.Element => {
 			<div className="this-conversation-dropdown">
 				<SearchableDropdown
 					isRequired={true}
+					autoWidth={true}
 					onSelectValue={handleSelectContact}
 					title="Contact"
 					placeholder="Select contact"
 					options={contactOptions}
-					value={{ key: selectedContact?.id, label: selectedContact?.fields['Full Name'] }}
+					value={{ key: selectedContact?.id as string, label: selectedContact?.fields['Full Name'] as string }}
 					icon={<ChannelsIcon />}
 				/>
 			</div>

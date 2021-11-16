@@ -34,16 +34,6 @@ const ContactCard: React.FC<ContactCardProps> = ({ contact , id}) => {
 			key: 'Unattach contact',
 			onClick: onUnattachClick,
 		},
-		{
-			label: (<div>Copy link</div>),
-			key: 'Copy link',
-			onClick: onCopyLinkClick,
-		},
-		{
-			label: (<div>View in monday</div>),
-			key: 'View in ...',
-			onClick: onViewClick,
-		},
 	];
 
 	return (
