@@ -2,7 +2,7 @@ import React  from 'react';
 import { Link } from 'react-router-dom';
 import {
 	ItemCard,
-} from 'front-plugin-components-library';
+} from '@frontapp/plugin-components';
 import { Contact } from '../../interfaces/Contact';
 
 import './styles.scss';
@@ -33,16 +33,6 @@ const ContactCard: React.FC<ContactCardProps> = ({ contact , id}) => {
 			label: (<div>Unattach contact</div>),
 			key: 'Unattach contact',
 			onClick: onUnattachClick,
-		},
-		{
-			label: (<div>Copy link</div>),
-			key: 'Copy link',
-			onClick: onCopyLinkClick,
-		},
-		{
-			label: (<div>View in monday</div>),
-			key: 'View in ...',
-			onClick: onViewClick,
 		},
 	];
 

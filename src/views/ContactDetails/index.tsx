@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { IconButton, PageReturnHeader, ThreeDotButtonDropdown } from 'front-plugin-components-library';
+import { IconButton, PageReturnHeader, ThreeDotButtonDropdown } from '@frontapp/plugin-components';
 import { ContactFull } from '../../interfaces/Contact';
 import { CompanyFull } from "../../interfaces/Company";
 import { displayContact, displayCompany } from '../Primary/ThisConversationTab';
@@ -51,11 +51,6 @@ const ContactDetails:React.FC<ContactDetailsProps> = ({contacts, companies}) => 
 			key: 'Unattach contact',
 			onClick: onUnattachClick,
 		},
-		{
-			label: 'Copy link',
-			key: 'Copy link',
-			onClick: onCopyLinkClick,
-		},
 	];
 
 	return (
@@ -63,7 +58,6 @@ const ContactDetails:React.FC<ContactDetailsProps> = ({contacts, companies}) => 
 			<div className="details-header">
 				<PageReturnHeader onReturnClick={onGoBack} label="Contact details" />
 				<div className="details-header-buttons">
-					<IconButton icon="popout" onClick={onOpenClick} />
 					<ThreeDotButtonDropdown items={menuItems} />
 				</div>
 			</div>
