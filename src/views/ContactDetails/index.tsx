@@ -33,39 +33,10 @@ const ContactDetails:React.FC<ContactDetailsProps> = ({contacts, companies}) => 
 		goBack();
 	};
 
-	const onOpenClick = () => {
-		console.log('Open your service clicked');
-	};
-
-	const onUnattachClick = () => {
-		console.log('Unattach clicked');
-	};
-
-	const onCopyLinkClick = () => {
-		console.log('Copy clicked');
-	};
-
-	const menuItems = [
-		{
-			label: 'Unattach contact',
-			key: 'Unattach contact',
-			onClick: onUnattachClick,
-		},
-		{
-			label: 'Copy link',
-			key: 'Copy link',
-			onClick: onCopyLinkClick,
-		},
-	];
-
 	return (
 		<>
 			<div className="details-header">
 				<PageReturnHeader onReturnClick={onGoBack} label="Contact details" />
-				<div className="details-header-buttons">
-					<IconButton icon="popout" onClick={onOpenClick} />
-					<ThreeDotButtonDropdown items={menuItems} />
-				</div>
 			</div>
 			<div className="details-main-info">
 				{displayContact(contact?.fields)}

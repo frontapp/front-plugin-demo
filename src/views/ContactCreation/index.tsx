@@ -2,9 +2,8 @@ import React, { useCallback, useMemo } from 'react';
 import { Formik, FormikErrors, useFormikContext } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { SearchableDropdown, Footer, TextField, PageReturnHeader } from '@frontapp/plugin-components';
+import { SearchableDropdown, Footer, TextField, PageReturnHeader, SearchableDropdownItem } from '@frontapp/plugin-components';
 import { useAppDispatch } from '../../app/hooks';
-import { SearchableDropdownItem } from '../../types/SearchableDropdownItem';
 import { CompanyFull } from '../../interfaces/Company';
 import { ContactFull } from "../../interfaces/Contact";
 import { ROLE_OPTIONS } from '../../consts/roles';
@@ -95,7 +94,7 @@ const ContactCreation: React.FC<ContactCreationProps> = ({ companies, onContactC
 								isRequired={true}
 								label="Name"
 								value={values.name}
-								placeholder="Create contact name"
+								placeholder="Contact name"
 								onChange={(name: string) => setFieldValue('name', name)}
 							/>
 						</div>
@@ -103,7 +102,7 @@ const ContactCreation: React.FC<ContactCreationProps> = ({ companies, onContactC
 							<TextField
 								label="Email"
 								value={values.email}
-								placeholder="Create contact email"
+								placeholder="Contact email"
 								onChange={(name: string) => setFieldValue('email', name)}
 							/>
 						</div>
@@ -111,7 +110,7 @@ const ContactCreation: React.FC<ContactCreationProps> = ({ companies, onContactC
 							<TextField
 								label="Phone"
 								value={values.phone}
-								placeholder="Create contact phone"
+								placeholder="Contact phone"
 								onChange={(name: string) => setFieldValue('phone', name)}
 							/>
 						</div>
@@ -141,8 +140,8 @@ const ItemCompany: React.FC<ItemCompanyProps> = ({ companies }) => {
 	const { values, setFieldValue } = useFormikContext<FormValues>();
 	// TODO: get from store all companies (useAppSelector(companiesSelector);)
 	// useMemo - temporary
-	const companyOptions = useMemo(() => {
-		return companies.map(company => ({key: company.id, label: company.fields.Company}))
+	const companyOptions: SearchableDropdownItem[] = useMemo(() => {
+		return companies.map(company => ({key: company.id as string, label: company.fields.Company as string}))
 	}, [companies]);
 
 	const handleSelectCompany = (value: SearchableDropdownItem) => {
