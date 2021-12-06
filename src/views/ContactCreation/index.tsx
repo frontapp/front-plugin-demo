@@ -31,7 +31,15 @@ const formValidation = (values: FormValues) => {
 	const errors: FormikErrors<FormValues> = {};
 
 	if (!values.name?.length) {
-		errors.name = 'The Item Name is required!';
+		errors.name = 'The Contact Name is required.';
+	}
+
+	if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.email as string)) {
+		errors.email = 'Please enter a valid email.';
+	}
+
+	if (!values.email?.length) {
+		errors.email = 'The Email is required.';
 	}
 
 	return errors;
@@ -85,6 +93,9 @@ const ContactCreation: React.FC<ContactCreationProps> = ({ companies, onContactC
 					isValid,
 					dirty,
 					setFieldValue,
+					setTouched,
+					errors,
+					touched,
 				}) => (<>
 					<div className="contact-creation-body">
 						<PageReturnHeader label="Create new" onReturnClick={goBack} className="contact-creation-prh" />
@@ -96,14 +107,19 @@ const ContactCreation: React.FC<ContactCreationProps> = ({ companies, onContactC
 								value={values.name}
 								placeholder="Contact name"
 								onChange={(name: string) => setFieldValue('name', name)}
+								onBlur={() => setTouched({ ...touched, name: true }, true)}
+								errorText={errors.name && touched.name ? errors.name : ''}
 							/>
 						</div>
 						<div className="contact-field-wrapper">
 							<TextField
+								isRequired={true}
 								label="Email"
 								value={values.email}
 								placeholder="Contact email"
 								onChange={(name: string) => setFieldValue('email', name)}
+								onBlur={() => setTouched({ ...touched, email: true }, true)}
+								errorText={errors.email && touched.email ? errors.email : ''}
 							/>
 						</div>
 						<div className="contact-field-wrapper">
