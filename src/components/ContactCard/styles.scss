@@ -1,5 +1,6 @@
-.contact-cart-link-wrapper {
-	text-decoration: none;
+.contact-card {
+	margin-bottom: 16px;
+	cursor: pointer;
 
 	&, &:hover, &:active, &:focus {
 		color: inherit;
@@ -8,10 +9,6 @@
 	.fpcl-item-card-header {
 		margin-bottom: 0;
 	}
-}
-
-.contact-card {
-	margin-bottom: 16px;
 
 	.contact-card-body-line {
 		display: flex;
