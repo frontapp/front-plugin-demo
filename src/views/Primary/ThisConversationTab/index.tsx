@@ -14,17 +14,17 @@ const displayRow = ({ title, value }: { title: string; value?: any; }) => value 
 </> : null;
 
 export const displayContact = (contact?: Contact) => {
-	return contact ? <div className="details-main-info">
+	return contact ? <>
 		<div className="details-section-title">{contact['Full Name']}</div>
 		{displayRow({ title: 'Email', value: contact.Email })}
 		{displayRow({ title: 'Phone', value: contact.Phone })}
 		{displayRow({ title: 'Role', value: contact.Role?.join(', ') })}
 		{displayRow({ title: 'Title', value: contact.Title })}
-	</div> : null;
+	</> : null;
 }
 
 export const displayCompany = (company?: Company) => {
-	return company ? <div className="details-item-column-values">
+	return company ? <>
 		<div className="details-section-title">{company.Company}</div>
 		{displayRow({ title: 'Website', value: company.Website })}
 		{displayRow({ title: 'Address', value: company.Address })}
@@ -33,7 +33,7 @@ export const displayCompany = (company?: Company) => {
 		{displayRow({ title: 'Contract Value', value: company['Contract Value'] })}
 		{displayRow({ title: 'Segment', value: company.Segment })}
 		{displayRow({ title: 'Contract Renewal Date', value: company.Renewal })}
-	</div> : null;
+	</> : null;
 }
 
 const ThisConversationTab = (): JSX.Element => {
@@ -109,7 +109,7 @@ const ThisConversationTab = (): JSX.Element => {
 				/>
 			</div>
 		</div>
-		{selectedContact && <div>
+		{selectedContact && <div className="details-main-info">
 			{displayContact(selectedContact.fields)}
 			{/* there is a possibility one contact has multiple companies assignment*/}
 			{companiesToBeDisplayed.map((c: Company) =>  displayCompany(c))}
