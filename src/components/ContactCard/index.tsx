@@ -21,15 +21,21 @@ const ContactCard: React.FC<ContactCardProps> = ({ contact , id}) => {
 
 	return (
 		<ItemCard title={contact['Full Name']} width={'100%'} className="contact-card" onClick={() => goToItem(id)}>
-			<div className="contact-card-body-line">
-				<span className="item-card-body-line-text">{contact['Email']}</span>
-			</div>
-			<div className="contact-card-body-line">
-				<span className="item-card-body-line-text">{contact['Phone']}</span>
-			</div>
-			<div className="contact-card-body-line">
-				<span className="item-card-body-line-text">{contact['Title']}</span>
-			</div>
+			{
+				contact['Email'] ? <div className="contact-card-body-line">
+					<span className="item-card-body-line-text">{contact['Email']}</span>
+				</div> : null
+			}
+			{
+				contact['Phone']? <div className="contact-card-body-line">
+					<span className="item-card-body-line-text">{contact['Phone']}</span>
+				</div> : null
+			}
+			{
+				contact['Title'] ? <div className="contact-card-body-line">
+					<span className="item-card-body-line-text">{contact['Title']}</span>
+				</div> : null
+			}
 		</ItemCard>
 	);
 };
