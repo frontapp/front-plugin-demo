@@ -1,22 +1,20 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useEffect, useState } from 'react';
 import { Formik, FormikErrors, useFormikContext } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { SearchableDropdown, Footer, TextField, PageReturnHeader, SearchableDropdownItem } from '@frontapp/plugin-components';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppSelector } from '../../app/hooks';
 import { CompanyFull } from '../../interfaces/Company';
 import { ContactFull } from "../../interfaces/Contact";
 import { ROLE_OPTIONS } from '../../consts/roles';
-import { createContact } from '../../utils/airtableUtils';
+import { createContact, getCompaniesList } from '../../utils/airtableUtils';
+import { frontContextSelector } from '../../app/frontContextSlice';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './styles.scss';
 
 // tslint:disable-next-line
-export interface ContactCreationProps {
-	companies: CompanyFull[];
-	onContactCreate: (contacts: ContactFull[]) => void;
-}
+export interface ContactCreationProps {}
 
 // Shape of form values
 interface FormValues {
@@ -53,9 +51,20 @@ const initialValues: FormValues = {
 	role: null,
 };
 
-const ContactCreation: React.FC<ContactCreationProps> = ({ companies, onContactCreate }) => {
+const ContactCreation: React.FC<ContactCreationProps> = () => {
 	const { goBack } = useHistory();
-	const dispatch = useAppDispatch();
+	const frontContext = useAppSelector(frontContextSelector);
+	const [companies, setCompanies] = useState<CompanyFull[]>([]);
+
+	useEffect(() => {
+		// Example of requests. Will be removed after further improvements
+		const getCompanies = async () => {
+			const companies = await getCompaniesList(frontContext);
+			setCompanies(companies);
+		}
+
+		frontContext && getCompanies();
+	}, [frontContext]);
 
 	const onSubmit = useCallback(async (values) => {
 		const dataToPass: ContactFull[] = [{
@@ -71,14 +80,13 @@ const ContactCreation: React.FC<ContactCreationProps> = ({ companies, onContactC
 		if (values.role?.key) {
 			dataToPass[0].fields.Role = [values.role?.key];
 		}
-		const createdContacts = await createContact(dataToPass);
-		onContactCreate(createdContacts);
+		await createContact(frontContext, dataToPass);
 
 		toast.success('Contact created!', {
 			position: toast.POSITION.TOP_RIGHT,
 			autoClose: 5000
 		});
-	},[dispatch, goBack]);
+	},[frontContext]);
 
 	return (
 		<div className="contact-creation-wrapper">
