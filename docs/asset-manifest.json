@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/front-plugin-demo/static/css/main.a64828bf.chunk.css",
-    "main.js": "/front-plugin-demo/static/js/main.406d64d9.chunk.js",
-    "main.js.map": "/front-plugin-demo/static/js/main.406d64d9.chunk.js.map",
+    "main.js": "/front-plugin-demo/static/js/main.d972ea56.chunk.js",
+    "main.js.map": "/front-plugin-demo/static/js/main.d972ea56.chunk.js.map",
     "runtime-main.js": "/front-plugin-demo/static/js/runtime-main.1cbfa55d.js",
     "runtime-main.js.map": "/front-plugin-demo/static/js/runtime-main.1cbfa55d.js.map",
     "static/css/2.f4c56af9.chunk.css": "/front-plugin-demo/static/css/2.f4c56af9.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.f4c56af9.chunk.css",
     "static/js/2.108add4f.chunk.js",
     "static/css/main.a64828bf.chunk.css",
-    "static/js/main.406d64d9.chunk.js"
+    "static/js/main.d972ea56.chunk.js"
   ]
 }
