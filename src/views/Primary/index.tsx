@@ -7,8 +7,8 @@ import { useAppSelector } from '../../app/hooks';
 import { frontContextSelector } from '../../app/frontContextSlice';
 import { getCompaniesList, getContactsList } from '../../utils/airtableUtils';
 
-import ThisConversationTab from "./ThisConversationTab";
-import SearchTab from "./SearchTab";
+import ThisConversationTab from './ThisConversationTab';
+import SearchTab from './SearchTab';
 
 import './styles.scss';
 

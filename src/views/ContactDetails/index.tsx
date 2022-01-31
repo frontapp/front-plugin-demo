@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { PageReturnHeader } from '@frontapp/plugin-components';
 import { ContactFull } from '../../interfaces/Contact';
-import { CompanyFull } from "../../interfaces/Company";
+import { CompanyFull } from '../../interfaces/Company';
 import { displayContact, displayCompany } from '../Primary/ThisConversationTab';
 import { useAppSelector } from '../../app/hooks';
 import { frontContextSelector } from '../../app/frontContextSlice';

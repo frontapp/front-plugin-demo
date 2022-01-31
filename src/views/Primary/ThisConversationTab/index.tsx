@@ -1,9 +1,9 @@
-import React, {useEffect, useState, Fragment, useCallback} from 'react';
-import { SearchableDropdown, ChannelsIcon, SearchableDropdownItem } from "@frontapp/plugin-components";
-import { useAppSelector } from "../../../app/hooks";
-import { frontContextSelector } from "../../../app/frontContextSlice";
-import { Contact, ContactFull } from "../../../interfaces/Contact";
-import { Company, CompanyFull } from "../../../interfaces/Company";
+import React, { useEffect, useState, Fragment, useCallback } from 'react';
+import { SearchableDropdown, ChannelsIcon, SearchableDropdownItem } from '@frontapp/plugin-components';
+import { useAppSelector } from '../../../app/hooks';
+import { frontContextSelector } from '../../../app/frontContextSlice';
+import { Contact, ContactFull } from '../../../interfaces/Contact';
+import { Company, CompanyFull } from '../../../interfaces/Company';
 
 import './styles.scss';
 import { getCompaniesList, getContactsList } from "../../../utils/airtableUtils";

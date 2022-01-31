@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { SearchableDropdown, Footer, TextField, PageReturnHeader, SearchableDropdownItem } from '@frontapp/plugin-components';
 import { useAppSelector } from '../../app/hooks';
 import { CompanyFull } from '../../interfaces/Company';
-import { ContactFull } from "../../interfaces/Contact";
+import { ContactFull } from '../../interfaces/Contact';
 import { ROLE_OPTIONS } from '../../consts/roles';
 import { createContact, getCompaniesList } from '../../utils/airtableUtils';
 import { frontContextSelector } from '../../app/frontContextSlice';

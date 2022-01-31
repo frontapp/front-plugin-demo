@@ -1,7 +1,7 @@
-import {getBaseId} from "./helpers";
-import {CompanyFull} from "../interfaces/Company";
-import {ContactFull} from "../interfaces/Contact";
-import {HttpResponse, HttpVerbsEnum} from './frontUtils';
+import { getBaseId } from './helpers';
+import { CompanyFull } from '../interfaces/Company';
+import { ContactFull } from '../interfaces/Contact';
+import { HttpResponse, HttpVerbsEnum } from './frontUtils';
 
 const API_ENDPOINT = `https://api.airtable.com/v0/${getBaseId()}/`;
 
