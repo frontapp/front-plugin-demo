@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { SearchableDropdown, ChannelsIcon, SearchableDropdownItem } from "@frontapp/plugin-components";
-import { useAppSelector } from "../../../app/hooks";
-import { frontContextSelector } from "../../../app/frontContextSlice";
-import { Contact, ContactFull } from "../../../interfaces/Contact";
-import { Company, CompanyFull } from "../../../interfaces/Company";
+import React, { useEffect, useState, Fragment, useCallback } from 'react';
+import { SearchableDropdown, ChannelsIcon, SearchableDropdownItem } from '@frontapp/plugin-components';
+import { useAppSelector } from '../../../app/hooks';
+import { frontContextSelector } from '../../../app/frontContextSlice';
+import { Contact, ContactFull } from '../../../interfaces/Contact';
+import { Company, CompanyFull } from '../../../interfaces/Company';
 
 import './styles.scss';
 import { getCompaniesList, getContactsList } from "../../../utils/airtableUtils";
@@ -24,7 +24,7 @@ export const displayContact = (contact?: Contact) => {
 }
 
 export const displayCompany = (company?: Company) => {
-	return company ? <>
+	return company ? <Fragment key={company.Company}>
 		<div className="details-section-title">{company.Company}</div>
 		{displayRow({ title: 'Website', value: company.Website })}
 		{displayRow({ title: 'Address', value: company.Address })}
@@ -33,7 +33,7 @@ export const displayCompany = (company?: Company) => {
 		{displayRow({ title: 'Contract Value', value: company['Contract Value'] })}
 		{displayRow({ title: 'Segment', value: company.Segment })}
 		{displayRow({ title: 'Contract Renewal Date', value: company.Renewal })}
-	</> : null;
+	</ Fragment> : null;
 }
 
 const ThisConversationTab = (): JSX.Element => {
@@ -48,22 +48,22 @@ const ThisConversationTab = (): JSX.Element => {
 	// currently shown contact
 	const [selectedContact, selectContact] = useState<ContactFull | null>();
 
-	const handleSelectContact = (option: SearchableDropdownItem) => {
+	const handleSelectContact = useCallback((option: SearchableDropdownItem) => {
 		const item = contacts.find(contact => contact.id === option.key)
 		if (item) {
 			selectContact(item);
 		}
-	};
+	}, [contacts]);
 
-	const getData = async (contactNames: string[]) => {
+	const getData = useCallback(async (contactNames: string[]) => {
 		// TODO add new values to DB to see real contacts in plugin
 		contactNames = ["Leyton Graves","Pierre Smith"]
-		const contacts = await getContactsList({'filterByFormula': `OR(${contactNames.map(name => `{Full Name}='${name}'`)})`});
-		const companies = await getCompaniesList({'filterByFormula': `OR(${contacts.map((c: any) => `FIND('${c.fields["Full Name"]}', ARRAYJOIN({Contacts}))`)})`});
+		const contacts = await getContactsList(frontContext, {'filterByFormula': `OR(${contactNames.map(name => `{Full Name}='${name}'`)})`});
+		const companies = await getCompaniesList(frontContext,{'filterByFormula': `OR(${contacts.map((c: any) => `FIND('${c.fields["Full Name"]}', ARRAYJOIN({Contacts}))`)})`});
 
 		setContacts(contacts);
 		setCompanies(companies);
-	}
+	}, [frontContext]);
 
 
 	// Takes contact names from Front Conversation
@@ -83,14 +83,14 @@ const ThisConversationTab = (): JSX.Element => {
 			setContacts([])
 			setCompanies([])
 		});
-	}, [frontContext]);
+	}, [frontContext, getData]);
 
 	useEffect(() => {
 		const dropdownOptions = contacts.map(contact => ({ key: contact.id as string, label: contact.fields['Full Name'] }))
 		setContactOptions(dropdownOptions);
 
 		dropdownOptions.length ? handleSelectContact(dropdownOptions[0]) : selectContact(null)
-	}, [contacts])
+	}, [contacts, handleSelectContact])
 
 	const companiesToBeDisplayed = selectedContact ? companies.filter(c => c?.fields?.Contacts?.includes(selectedContact?.id as string)).map(c => c.fields) : [];
 

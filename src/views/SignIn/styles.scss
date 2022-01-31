@@ -1,0 +1,29 @@
+.sign-in-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 100vh;
+
+	.sign-in-button {
+		margin-top: 32px;
+	}
+
+	.sign-in-content {
+		display: flex;
+		flex-direction: column;
+		max-width: 400px;
+		width: 100%;
+		padding: 0 6px;
+		box-sizing: border-box;
+	}
+
+	.sign-in-description {
+		margin: 6px 0 16px;
+		font-family: var(--common-font);
+		font-size: 12px;
+		color: var(--gray-70);
+		line-height: 150%;
+		letter-spacing: -0.0015em;
+	}
+}
