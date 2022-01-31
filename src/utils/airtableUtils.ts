@@ -3,18 +3,18 @@ import { CompanyFull } from '../interfaces/Company';
 import { ContactFull } from '../interfaces/Contact';
 import { HttpResponse, HttpVerbsEnum } from './frontUtils';
 
-const API_ENDPOINT = `https://api.airtable.com/v0/${getBaseId()}/`;
+const getAPIEndpoint = () => `https://api.airtable.com/v0/${getBaseId()}/`;
 
 const getHeaders = () => ({
 	'Content-Type': 'application/json',
 });
 
 type DataType = {
-    [key: string]: any
+	[key: string]: any
 }
 
 const requestWrapper = async (frontContext: any, url: string, method: HttpVerbsEnum, data?: DataType | null): Promise<any> => {
-	const responce: HttpResponse = await frontContext.relayHttp({ verb: method, url: API_ENDPOINT + url, body: data, headers: getHeaders() });
+	const responce: HttpResponse = await frontContext.relayHttp({ verb: method, url: getAPIEndpoint() + url, body: data, headers: getHeaders() });
 
 	// @ts-ignore
 	return responce?.body?.records;
