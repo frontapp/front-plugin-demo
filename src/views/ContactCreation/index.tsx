@@ -84,9 +84,12 @@ const ContactCreation: React.FC<ContactCreationProps> = () => {
 
 		toast.success('Contact created!', {
 			position: toast.POSITION.TOP_RIGHT,
-			autoClose: 5000
+			autoClose: 3000,
+			onClose: () => {
+				goBack();
+			},
 		});
-	},[frontContext]);
+	},[frontContext, goBack]);
 
 	return (
 		<div className="contact-creation-wrapper">

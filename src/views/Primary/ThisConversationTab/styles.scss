@@ -72,3 +72,25 @@
   color: var(--gray-80);
   margin-bottom: 16px;
 }
+
+.this-conversation-body-no-items-wrapper {
+	margin-top: 230px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	.this-conversation-body-no-items-text {
+		margin-bottom: 16px;
+		font-family: var(--common-font);
+		font-size: 14px;
+		line-height: 150%;
+		text-align: center;
+		letter-spacing: -0.0015em;
+		color: var(--gray-70);
+	}
+
+	.this-conversation-body-no-items-link {
+		text-decoration: none;
+	}
+}

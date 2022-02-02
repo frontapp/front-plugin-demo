@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Fragment, useCallback } from 'react';
-import { SearchableDropdown, ChannelsIcon, SearchableDropdownItem } from '@frontapp/plugin-components';
+import { SearchableDropdown, ChannelsIcon, SearchableDropdownItem, Button } from '@frontapp/plugin-components';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../app/hooks';
 import { frontContextSelector } from '../../../app/frontContextSlice';
 import { Contact, ContactFull } from '../../../interfaces/Contact';
@@ -56,11 +57,8 @@ const ThisConversationTab = (): JSX.Element => {
 	}, [contacts]);
 
 	const getData = useCallback(async (contactNames: string[]) => {
-		// TODO add new values to DB to see real contacts in plugin
-		contactNames = ["Leyton Graves","Pierre Smith"]
-		const contacts = await getContactsList(frontContext, {'filterByFormula': `OR(${contactNames.map(name => `{Full Name}='${name}'`)})`});
-		const companies = await getCompaniesList(frontContext,{'filterByFormula': `OR(${contacts.map((c: any) => `FIND('${c.fields["Full Name"]}', ARRAYJOIN({Contacts}))`)})`});
-
+		const contacts = await getContactsList(frontContext, `filterByFormula=OR(${contactNames.map(name => `{Full Name}='${name}'`)})`);
+		const companies = await getCompaniesList(frontContext,`filterByFormula=OR(${contacts.map((c: any) => `FIND('${c.fields["Full Name"]}', ARRAYJOIN({Contacts}))`)})`);
 		setContacts(contacts);
 		setCompanies(companies);
 	}, [frontContext]);
@@ -95,25 +93,37 @@ const ThisConversationTab = (): JSX.Element => {
 	const companiesToBeDisplayed = selectedContact ? companies.filter(c => c?.fields?.Contacts?.includes(selectedContact?.id as string)).map(c => c.fields) : [];
 
 	return <div className="this-conversation-wrapper">
-		<div className="this-conversation-header">
-			<div className="this-conversation-dropdown">
-				<SearchableDropdown
-					isRequired={true}
-					autoWidth={true}
-					onSelectValue={handleSelectContact}
-					title="Contact"
-					placeholder="Select contact"
-					options={contactOptions}
-					value={{ key: selectedContact?.id as string, label: selectedContact?.fields['Full Name'] as string }}
-					icon={<ChannelsIcon />}
-				/>
+		{selectedContact && (<>
+			<div className="this-conversation-header">
+				<div className="this-conversation-dropdown">
+					<SearchableDropdown
+						isRequired={true}
+						autoWidth={true}
+						onSelectValue={handleSelectContact}
+						title="Contact"
+						placeholder="Select contact"
+						options={contactOptions}
+						value={{ key: selectedContact?.id as string, label: selectedContact?.fields['Full Name'] as string }}
+						icon={<ChannelsIcon />}
+					/>
+				</div>
 			</div>
-		</div>
-		{selectedContact && <div className="details-main-info">
-			{displayContact(selectedContact.fields)}
-			{/* there is a possibility one contact has multiple companies assignment*/}
-			{companiesToBeDisplayed.map((c: Company) =>  displayCompany(c))}
-		</div>}
+			<div className="details-main-info">
+				{displayContact(selectedContact.fields)}
+				{/* there is a possibility one contact has multiple companies assignment*/}
+				{companiesToBeDisplayed.map((c: Company) => displayCompany(c))}
+			</div>
+		</>)}
+		{!selectedContact && companiesToBeDisplayed.length === 0 && (
+			<div className="this-conversation-body-no-items-wrapper">
+				<p className="this-conversation-body-no-items-text">
+					No contacts found in Airtable for this conversation.
+				</p>
+				<Link to={'/create'} className="this-conversation-body-no-items-link">
+					<Button variant="tertiary" label="Create contact" />
+				</Link>
+			</div>
+		)}
 	</div>
 };
 
