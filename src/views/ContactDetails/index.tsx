@@ -4,8 +4,8 @@ import { PageReturnHeader } from '@frontapp/plugin-components';
 import { ContactFull } from '../../interfaces/Contact';
 import { CompanyFull } from '../../interfaces/Company';
 import { displayContact, displayCompany } from '../Primary/ThisConversationTab';
-import { useAppSelector } from '../../app/hooks';
-import { frontContextSelector } from '../../app/frontContextSlice';
+import { useAppSelector } from '../../store/hooks';
+import { frontContextSelector } from '../../store/frontContextSlice';
 import { getCompaniesList, getContactsList } from '../../utils/airtableUtils';
 
 import './styles.scss';

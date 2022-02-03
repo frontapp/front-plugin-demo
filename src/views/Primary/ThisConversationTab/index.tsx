@@ -1,8 +1,8 @@
 import React, { useEffect, useState, Fragment, useCallback } from 'react';
 import { SearchableDropdown, ChannelsIcon, SearchableDropdownItem, Button } from '@frontapp/plugin-components';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../../app/hooks';
-import { frontContextSelector } from '../../../app/frontContextSlice';
+import { useAppSelector } from '../../../store/hooks';
+import { frontContextSelector } from '../../../store/frontContextSlice';
 import { Contact, ContactFull } from '../../../interfaces/Contact';
 import { Company, CompanyFull } from '../../../interfaces/Company';
 
@@ -57,8 +57,8 @@ const ThisConversationTab = (): JSX.Element => {
 	}, [contacts]);
 
 	const getData = useCallback(async (contactNames: string[]) => {
-		const contacts = await getContactsList(frontContext, `filterByFormula=OR(${contactNames.map(name => `{Full Name}='${name}'`)})`);
-		const companies = await getCompaniesList(frontContext,`filterByFormula=OR(${contacts.map((c: any) => `FIND('${c.fields["Full Name"]}', ARRAYJOIN({Contacts}))`)})`);
+		const contacts = await getContactsList(frontContext, `filterByFormula=OR(${contactNames.map(name => `{Full Name}='${name}'`)})`) || [];
+		const companies = await getCompaniesList(frontContext,`filterByFormula=OR(${contacts.map((c: any) => `FIND('${c.fields["Full Name"]}', ARRAYJOIN({Contacts}))`)})`) || [];
 		setContacts(contacts);
 		setCompanies(companies);
 	}, [frontContext]);

@@ -3,8 +3,8 @@ import { Switch, Route, useLocation, useHistory, Link } from 'react-router-dom';
 import { Tabs, Button } from '@frontapp/plugin-components';
 import { ContactFull } from '../../interfaces/Contact';
 import { CompanyFull } from "../../interfaces/Company";
-import { useAppSelector } from '../../app/hooks';
-import { frontContextSelector } from '../../app/frontContextSlice';
+import { useAppSelector } from '../../store/hooks';
+import { frontContextSelector } from '../../store/frontContextSlice';
 import { getCompaniesList, getContactsList } from '../../utils/airtableUtils';
 
 import ThisConversationTab from './ThisConversationTab';
@@ -36,11 +36,11 @@ const Primary: React.FC<PrimaryProps> = () => {
 	useEffect(() => {
 		// Example of requests. Will be removed after further improvements
 		const getCompanies = async () => {
-			const companies = await getCompaniesList(frontContext);
+			const companies = await getCompaniesList(frontContext) || [];
 			setCompanies(companies);
 		}
 		const getContacts = async () => {
-			const contacts = await getContactsList(frontContext);
+			const contacts = await getContactsList(frontContext) || [];
 			setContacts(contacts);
 		}
 
