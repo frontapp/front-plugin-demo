@@ -3,12 +3,12 @@ import { Formik, FormikErrors, useFormikContext } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { SearchableDropdown, Footer, TextField, PageReturnHeader, SearchableDropdownItem } from '@frontapp/plugin-components';
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../store/hooks';
 import { CompanyFull } from '../../interfaces/Company';
 import { ContactFull } from '../../interfaces/Contact';
 import { ROLE_OPTIONS } from '../../consts/roles';
 import { createContact, getCompaniesList } from '../../utils/airtableUtils';
-import { frontContextSelector } from '../../app/frontContextSlice';
+import { frontContextSelector } from '../../store/frontContextSlice';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './styles.scss';
@@ -84,9 +84,12 @@ const ContactCreation: React.FC<ContactCreationProps> = () => {
 
 		toast.success('Contact created!', {
 			position: toast.POSITION.TOP_RIGHT,
-			autoClose: 5000
+			autoClose: 3000,
+			onClose: () => {
+				goBack();
+			},
 		});
-	},[frontContext]);
+	},[frontContext, goBack]);
 
 	return (
 		<div className="contact-creation-wrapper">
@@ -165,7 +168,7 @@ const ItemCompany: React.FC<ItemCompanyProps> = ({ companies }) => {
 	// TODO: get from store all companies (useAppSelector(companiesSelector);)
 	// useMemo - temporary
 	const companyOptions: SearchableDropdownItem[] = useMemo(() => {
-		return companies.map(company => ({key: company.id as string, label: company.fields.Company as string}))
+		return (companies || []).map(company => ({key: company.id as string, label: company.fields.Company as string}))
 	}, [companies]);
 
 	const handleSelectCompany = (value: SearchableDropdownItem) => {

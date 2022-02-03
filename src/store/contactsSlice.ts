@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Contact } from '../interfaces/Contact';
-import { RootState } from './store';
+import { RootState } from './';
 
 const createContactMethod = () => Promise.resolve([]);
 
