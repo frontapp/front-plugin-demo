@@ -38,7 +38,6 @@ export const displayCompany = (company?: Company) => {
 }
 
 const ThisConversationTab = (): JSX.Element => {
-
 	const frontContext = useAppSelector(frontContextSelector);
 	// all contacts per conversation
 	const [contacts, setContacts] = useState<ContactFull[]>([]);
@@ -107,6 +106,9 @@ const ThisConversationTab = (): JSX.Element => {
 						icon={<ChannelsIcon />}
 					/>
 				</div>
+				<Link to={'/create'} className="primary-header-link">
+					<Button variant="tertiary" label="+ Create contact" />
+				</Link>
 			</div>
 			<div className="details-main-info">
 				{displayContact(selectedContact.fields)}

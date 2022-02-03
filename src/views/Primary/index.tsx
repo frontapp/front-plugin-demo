@@ -3,8 +3,9 @@ import { Switch, Route, useLocation, useHistory, Link } from 'react-router-dom';
 import { Tabs, Button } from '@frontapp/plugin-components';
 import { ContactFull } from '../../interfaces/Contact';
 import { CompanyFull } from "../../interfaces/Company";
-import { useAppSelector } from '../../store/hooks';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { frontContextSelector } from '../../store/frontContextSlice';
+import { setAuthentication } from '../../store/usersSlice';
 import { getCompaniesList, getContactsList } from '../../utils/airtableUtils';
 
 import ThisConversationTab from './ThisConversationTab';
@@ -28,6 +29,7 @@ export interface PrimaryProps {}
 const Primary: React.FC<PrimaryProps> = () => {
 	const history = useHistory();
 	const location = useLocation();
+	const dispatch = useAppDispatch();
 	const frontContext = useAppSelector(frontContextSelector);
 	const [selectedTab, setSelectedTab] = useState(tabs[0].key);
 	const [contacts, setContacts] = useState<ContactFull[]>([]);
@@ -58,13 +60,15 @@ const Primary: React.FC<PrimaryProps> = () => {
 		setSelectedTab(tabKey);
 	};
 
+	const onLogOut = () => {
+		dispatch(setAuthentication(false));
+	};
+
 	return (
 		<div>
 			<div className="primary-header">
 				<span className="primary-header-text">Items</span>
-				<Link to={'/create'} className="primary-header-link">
-					<Button variant="tertiary" label="+ Create contact" />
-				</Link>
+				<Button variant="tertiary" label="Log out" onClick={onLogOut} />
 			</div>
 			<Tabs tabs={tabs} onClick={onTabClick} isSelected={selectedTab} />
 			<Switch>

@@ -29,9 +29,15 @@ function App() {
 	return frontContext ? (
 		<Router>
 			<Switch>
-				<ProtectedRoute path="/create" component={ItemCreation} />
-				<ProtectedRoute path="/items/:id" component={ItemDetails} />
-				<ProtectedRoute path="/primary" component={Primary} />
+				<ProtectedRoute path="/create">
+					<ItemCreation />
+				</ProtectedRoute>
+				<ProtectedRoute path="/items/:id">
+					<ItemDetails />
+				</ProtectedRoute>
+				<ProtectedRoute path="/primary">
+					<Primary />
+				</ProtectedRoute>
 				<Route component={SignIn} path="/" />
 			</Switch>
 		</Router>

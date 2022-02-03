@@ -6,14 +6,6 @@
   height: 61px;
 }
 
-.this-conversation-dropdown {
-  margin: 16px;
-
-	.fpcl-dropdown {
-		width: 100%;
-	}
-}
-
 .details-main-info {
   padding-left: 16px;
   padding-bottom: 8px;
@@ -91,6 +83,27 @@
 	}
 
 	.this-conversation-body-no-items-link {
+		text-decoration: none;
+	}
+}
+
+.this-conversation-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	margin: 16px;
+
+	.this-conversation-dropdown {
+		flex: 1;
+
+		.fpcl-dropdown {
+			width: 100%;
+		}
+	}
+
+	.primary-header-link {
+		margin: 2px 4px;
 		text-decoration: none;
 	}
 }

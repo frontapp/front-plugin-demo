@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './index';
-import { getBaseId } from "../utils/helpers";
+import { getBaseId, removeBaseId } from "../utils/helpers";
 import { checkBaseId } from "../utils/airtableUtils";
 
 
@@ -29,7 +29,10 @@ export const usersSlice = createSlice({
 	initialState,
 	reducers: {
 		setAuthentication(state, action: PayloadAction<boolean>) {
-			state.authorized = action.payload;
+			const status = action.payload;
+			// remove base id from localstorage if false
+			!status && removeBaseId();
+			state.authorized = status;
 		},
 	},
 	extraReducers: (builder) => {
