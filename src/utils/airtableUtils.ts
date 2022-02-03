@@ -20,12 +20,12 @@ const requestWrapper = async (frontContext: any, url: string, method: HttpVerbsE
 	return responce?.body?.records;
 };
 
-export const getCompaniesList = (frontContext: any, data?: DataType): Promise<CompanyFull[]> => {
-	return requestWrapper(frontContext, 'Companies', HttpVerbsEnum.GET, data);
+export const getCompaniesList = (frontContext: any, query?: string): Promise<CompanyFull[]> => {
+	return requestWrapper(frontContext, `Companies${query?.length ? '?' + query : ''}`, HttpVerbsEnum.GET);
 }
 
-export const getContactsList = (frontContext: any, data?: DataType): Promise<ContactFull[]> => {
-	return requestWrapper(frontContext,'Contacts', HttpVerbsEnum.GET, data);
+export const getContactsList = (frontContext: any, query?: string): Promise<ContactFull[]> => {
+	return requestWrapper(frontContext,`Contacts${query?.length ? '?' + query : ''}`, HttpVerbsEnum.GET);
 }
 
 export const createContact = (frontContext: any, data: ContactFull[]): Promise<ContactFull[]> => {

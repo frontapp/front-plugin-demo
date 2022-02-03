@@ -1,8 +1,6 @@
 import React  from 'react';
 import { useHistory } from 'react-router-dom';
-import {
-	ItemCard,
-} from '@frontapp/plugin-components';
+import { TaskCard } from '@frontapp/plugin-components';
 import { Contact } from '../../interfaces/Contact';
 
 import './styles.scss';
@@ -20,7 +18,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ contact , id}) => {
 	};
 
 	return (
-		<ItemCard title={contact['Full Name']} width={'100%'} className="contact-card" onClick={() => goToItem(id)}>
+		<TaskCard variant="no-icon" title={contact['Full Name']} width="100%" className="contact-card" onClick={() => goToItem(id)}>
 			{
 				contact['Email'] ? <div className="contact-card-body-line">
 					<span className="item-card-body-line-text">{contact['Email']}</span>
@@ -36,7 +34,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ contact , id}) => {
 					<span className="item-card-body-line-text">{contact['Title']}</span>
 				</div> : null
 			}
-		</ItemCard>
+		</TaskCard>
 	);
 };
 
