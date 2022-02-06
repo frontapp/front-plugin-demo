@@ -17,18 +17,18 @@ export const fetchUserAuthorized = createAsyncThunk('users/fetchUserAuthorized',
 
 
 interface UsersState {
-	authorized: boolean;
+	authorized: boolean | null; // null - not authorized, true/false - authorized
 }
 
 const initialState: UsersState = {
-	authorized: false,
+	authorized: null,
 };
 
 export const usersSlice = createSlice({
 	name: 'users',
 	initialState,
 	reducers: {
-		setAuthentication(state, action: PayloadAction<boolean>) {
+		setAuthentication(state, action: PayloadAction<boolean | null>) {
 			const status = action.payload;
 			// remove base id from localstorage if false
 			!status && removeBaseId();
@@ -44,6 +44,6 @@ export const usersSlice = createSlice({
 
 export const { setAuthentication } = usersSlice.actions;
 
-export const authorizedSelector = (state: RootState): boolean => state.users.authorized;
+export const authorizedSelector = (state: RootState): boolean | null => state.users.authorized;
 
 export default usersSlice.reducer;

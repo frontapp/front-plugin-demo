@@ -33,7 +33,7 @@ const SearchTab:React.FC<SearchTabProps> = ({contacts}) => {
 			)
 		}
 		{
-			contactsToDisplay.length > 0 && contactsToDisplay.map(({ fields, id }) => <ContactCard contact={fields} key={fields['Full Name']} id={id as string} />)
+			contactsToDisplay.length > 0 && contactsToDisplay.map(({ fields, id }, index) => <ContactCard contact={fields} key={`${fields['Full Name']}${index}`} id={id as string} />)
 		}
 		{
 			contactsToDisplay.length === 0 && !!searchValue && <NoResults className="search-tab-body-no-results" />
