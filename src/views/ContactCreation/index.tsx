@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useEffect, useState } from 'react';
 import { Formik, FormikErrors, useFormikContext } from 'formik';
 import { useHistory } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { SearchableDropdown, Footer, TextField, PageReturnHeader, SearchableDropdownItem } from '@frontapp/plugin-components';
 import { useAppSelector } from '../../store/hooks';
 import { CompanyFull } from '../../interfaces/Company';
@@ -9,7 +9,6 @@ import { ContactFull } from '../../interfaces/Contact';
 import { ROLE_OPTIONS } from '../../consts/roles';
 import { createContact, getCompaniesList } from '../../utils/airtableUtils';
 import { frontContextSelector } from '../../store/frontContextSlice';
-import 'react-toastify/dist/ReactToastify.css';
 
 import './styles.scss';
 
@@ -84,11 +83,10 @@ const ContactCreation: React.FC<ContactCreationProps> = () => {
 
 		toast.success('Contact created!', {
 			position: toast.POSITION.TOP_RIGHT,
-			autoClose: 3000,
-			onClose: () => {
-				goBack();
-			},
+			autoClose: 5000,
 		});
+
+		goBack();
 	},[frontContext, goBack]);
 
 	return (
@@ -153,7 +151,6 @@ const ContactCreation: React.FC<ContactCreationProps> = () => {
 					/>
 				</>)}
 			</Formik>
-			<ToastContainer />
 		</div>
 	);
 };
