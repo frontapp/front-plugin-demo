@@ -32,7 +32,7 @@ function App() {
 
 	return authorized !== null ? (
 		<>
-			<Router>
+			<Router basename="/front-plugin-demo">
 				<Switch>
 					<ProtectedRoute path="/create">
 						<ItemCreation />
