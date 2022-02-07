@@ -67,7 +67,7 @@ const Primary: React.FC<PrimaryProps> = () => {
 	return (
 		<div>
 			<div className="primary-header">
-				<span className="primary-header-text">Items</span>
+				<span className="primary-header-text">Contacts</span>
 				<Button variant="tertiary" label="Log out" onClick={onLogOut} />
 			</div>
 			<Tabs tabs={tabs} onClick={onTabClick} isSelected={selectedTab} />
