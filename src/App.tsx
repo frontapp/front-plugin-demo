@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import Primary from './views/Primary';
 import ItemDetails from './views/ContactDetails';
@@ -10,12 +10,13 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Front from '@frontapp/plugin-sdk';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { setFrontContext, frontContextSelector } from './store/frontContextSlice';
+import { authorizedSelector } from './store/usersSlice';
 import { fetchUserAuthorized } from './store/usersSlice';
-
 
 function App() {
 	const dispatch = useAppDispatch();
 	const frontContext = useAppSelector(frontContextSelector);
+	const authorized = useAppSelector(authorizedSelector);
 
 	useEffect(() => {
 		frontContext && dispatch(fetchUserAuthorized(frontContext));
@@ -26,7 +27,7 @@ function App() {
 		return () => subscription.unsubscribe();
 	}, [dispatch]);
 
-	return frontContext ? (
+	return authorized !== null ? (
 		<Router>
 			<Switch>
 				<ProtectedRoute path="/create">
@@ -38,7 +39,9 @@ function App() {
 				<ProtectedRoute path="/primary">
 					<Primary />
 				</ProtectedRoute>
-				<Route component={SignIn} path="/" />
+				<Route exact path="/">
+					{authorized ? <Redirect to="/primary" /> : <SignIn />}
+				</Route>
 			</Switch>
 		</Router>
 	) : null;

@@ -34,35 +34,44 @@
 }
 
 .details-section-title {
-  font-family: var(--common-font);
-  font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 100%;
-  letter-spacing: -0.45px;
-  color: var(--gray-80);
-  margin-bottom: 12px;
+	font-family: var(--common-font);
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 100%;
+	letter-spacing: -0.45px;
+	color: var(--gray-80);
+	margin-bottom: 12px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .details-section-item-property-name {
-  font-family: var(--common-font);
-  font-style: normal;
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 16px;
-  letter-spacing: -0.078px;
-  color: var(--gray-90);
-  margin-bottom: 4px;
+	font-family: var(--common-font);
+	font-style: normal;
+	font-weight: 600;
+	font-size: 13px;
+	line-height: 16px;
+	letter-spacing: -0.078px;
+	color: var(--gray-90);
+	margin-bottom: 4px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .details-section-item-property-value {
-  font-family: var(--common-font);
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  letter-spacing: -0.15px;
-  color: var(--gray-80);
-  margin-bottom: 16px;
+	font-family: var(--common-font);
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 17px;
+	letter-spacing: -0.15px;
+	color: var(--gray-80);
+	margin-bottom: 16px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .this-conversation-body-no-items-wrapper {
