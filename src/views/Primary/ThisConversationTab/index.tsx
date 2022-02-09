@@ -56,7 +56,8 @@ const ThisConversationTab = (): JSX.Element => {
 	}, [contacts]);
 
 	const getData = useCallback(async (contactNames: string[]) => {
-		const contacts = await getContactsList(frontContext, `filterByFormula=OR(${contactNames.map(name => `{Full Name}='${name}'`)})`) || [];
+		// find contacts by Email and Full Name
+		const contacts = await getContactsList(frontContext, `filterByFormula=OR(${contactNames.map(name => `{Email}='${name}',{Full Name}='${name}'`)})`) || [];
 		const companies = await getCompaniesList(frontContext,`filterByFormula=OR(${contacts.map((c: any) => `FIND('${c.fields["Full Name"]}', ARRAYJOIN({Contacts}))`)})`) || [];
 		setContacts(contacts);
 		setCompanies(companies);
